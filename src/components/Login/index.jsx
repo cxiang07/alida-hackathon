@@ -10,6 +10,8 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { useDispatch, useSelector } from "react-redux";
+import { setUserInfo, userLogin } from "../../redux/actions/userAction";
 
 function Copyright() {
   return (
@@ -44,17 +46,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+export default function Login() {
   const classes = useStyles();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
 
   const onSubmit = (e) => {
     e.preventDefault();
+    
+    dispatch(userLogin(username, password));
+
     setUsername('');
     setPassword('');
-
-    // Perform Authentication
   };
 
   const onChange = (e) => {
