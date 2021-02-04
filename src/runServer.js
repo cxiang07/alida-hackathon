@@ -7,10 +7,10 @@ const PORT = 3444;
 
 async function auth(ctx, next) {
     const { authorization } = ctx.request.header;
-    const token = authorization.split(' ')[1];
+    const token2 = authorization.split(' ')[1];
     // Commented out as we won't be using any form of encoding for now
-    // const buff = Buffer.from(token2, 'base64');
-    // const token = buff.toString('ascii');
+    const buff = Buffer.from(token2, 'base64');
+    const token = buff.toString('ascii');
     // console.log(`token: ${data}`)
 
     ctx.state = {};
