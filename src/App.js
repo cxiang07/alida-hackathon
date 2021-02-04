@@ -1,35 +1,21 @@
-import logo from "./logo.svg";
-import "./App.css";
-import { useDispatch, useSelector } from "react-redux";
-import { setStories } from "./redux/actions/storeAction";
+import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import Login from '../src/components/Login';
+import ReduxTest from './ReduxTest';
 
 function App() {
-  const dispatch = useDispatch();
-  const stories = useSelector((state) => state.stories);
-
   return (
     <div className="App">
-      <img src={logo} className="App-logo" alt="logo" />
-      <h1> Hello</h1>
-      <h1>
-        {stories[0].id}--{stories[0].date}
-      </h1>
-      <br></br>
-      <button
-        onClick={() =>
-          dispatch(
-            setStories([
-              {
-                id: 567,
-                date: "2020-02-05",
-                title: "set stories",
-              },
-            ])
-          )
-        }
-      >
-        hi
-      </button>
+      <Router>
+        <Switch>
+          <Route path='/redux' exact component={ReduxTest} />
+          <Route path='/' exact component={Login} />
+          <Route path='/login' exact component={Login} />
+          {/* TODO: Add Routes
+          <Route path='/stories' exact component={} />
+          <Route path='/stories/:id' exact component={} />
+          <Route path='/upload' exact component={} /> */}
+        </Switch>
+      </Router>
     </div>
   );
 }
