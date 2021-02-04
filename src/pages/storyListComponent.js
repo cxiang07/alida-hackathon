@@ -11,7 +11,6 @@ import Container from "@material-ui/core/Container";
 import { TagsCell } from "../components/tagsCell";
 import { PageHeading } from "../components/PageHeading";
 import { useSelector, useDispatch } from "react-redux";
-import { userLogin } from "../redux/actions/userAction";
 
 const heading = "Your story";
 const subheading = (
@@ -67,9 +66,32 @@ const useStyles = makeStyles({
   },
 });
 
+function toDateTime(secs) {
+  let t = new Date(1970, 0, 1); // Epoch
+  t.setSeconds(secs);
+  return t.toDateString();
+}
+
+function generateTags(story) {
+  let tags = [];
+
+  if (story.story_poll_voter_infos) {
+    tags.push("Poll Survery");
+  }
+  if (story.story_sliders) {
+    tags.push("Slider Survery");
+  }
+  if (story.story_questions) {
+    tags.push("Short Answer Survery");
+  }
+  if (story.story_quizs) {
+    tags.push("Single Choice Survery");
+  }
+  return tags;
+}
+
 export const StoryListPage = () => {
   const classes = useStyles();
-  const dispatch = useDispatch();
   const stories = useSelector((state) => state.stories);
 
   return (
@@ -83,25 +105,29 @@ export const StoryListPage = () => {
             <TableHead>
               <TableRow>
                 <StyledTableCell align="center">Story ID</StyledTableCell>
-                <StyledTableCell align="center">
-                  Story publish Date
-                </StyledTableCell>
+                <StyledTableCell align="center">Created At</StyledTableCell>
+                <StyledTableCell align="center">Expire At</StyledTableCell>
                 <StyledTableCell align="center">Viewer Count</StyledTableCell>
                 <StyledTableCell align="center">Tags</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
-                <StyledTableRow key={row.storyId}>
+              {stories.map((story) => (
+                <StyledTableRow key={story.id}>
                   <StyledTableCell component="th" scope="row" align="center">
-                    {row.storyId}
-                  </StyledTableCell>
-                  <StyledTableCell align="center">{row.date}</StyledTableCell>
-                  <StyledTableCell align="center">
-                    {row.viewCount}
+                    {story.id}
                   </StyledTableCell>
                   <StyledTableCell align="center">
-                    <TagsCell tags={row.tags}></TagsCell>
+                    {toDateTime(story.taken_at)}
+                  </StyledTableCell>
+                  <StyledTableCell align="center">
+                    {toDateTime(story.expiring_at)}
+                  </StyledTableCell>
+                  <StyledTableCell align="center">
+                    {story.viewer_count}
+                  </StyledTableCell>
+                  <StyledTableCell align="center">
+                    <TagsCell tags={generateTags(story)}></TagsCell>
                   </StyledTableCell>
                 </StyledTableRow>
               ))}
@@ -109,9 +135,6 @@ export const StoryListPage = () => {
           </Table>
         </TableContainer>
       </Container>
-
-      <br />
-      <button onClick={() => dispatch(userLogin())}>Test</button>
     </div>
   );
 };

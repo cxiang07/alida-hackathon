@@ -1,18 +1,8 @@
 import { setStories } from "./storeAction";
-import { useSelector } from "redux";
-import axios from "axios";
 
 const axios = require("axios");
 
-// export const setUserInfo = (accountName, password) => {
-//   return {
-//     type: "SET_USER_INFO",
-//     accountName,
-//     password,
-//   };
-// };
-
-export const userLogin = (username, password) => {
+export const userLogin = (username, password, history) => {
   return function (dispatch) {
     const token = Buffer.from(`${username}:${password}`, "utf8").toString(
       "base64"
@@ -25,8 +15,8 @@ export const userLogin = (username, password) => {
         },
       })
       .then((res) => {
-        console.log(res);
         dispatch(setStories(res.data));
+        history.push("/stories");
       })
       .catch((error) => {
         console.log(error);
