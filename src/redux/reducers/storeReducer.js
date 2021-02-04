@@ -13,5 +13,5 @@ const INITIAL_STATE = [
 export const storyReducer = (state = INITIAL_STATE, action) => {
   if (action.type === "SET_STORIES") {
     return action.stories;
-  } else return { ...state };
+  } else return state.slice();
 };
