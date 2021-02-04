@@ -1,5 +1,6 @@
 import { setStories } from "./storeAction";
 import { useSelector } from "redux";
+import axios from "axios";
 
 export const setUserInfo = (accountName, password) => {
   return {
@@ -9,12 +10,20 @@ export const setUserInfo = (accountName, password) => {
   };
 };
 
-export const userLogin = () => {
+export const userLogin = (username, password) => {
   return function (dispatch) {
-    const userInfo = useSelector((state) => state.userInfo);
+    const token = Buffer.from(`${username}:${password}`, "utf8").toString(
+      "base64"
+    );
+
     axios
-      .put("/stories", userInfo)
+      .get("http://localhost:3444/v1/stories", {
+        headers: {
+          Authorization: `Basic ${token}`,
+        },
+      })
       .then((res) => {
+        console.log(res);
         dispatch(setStories(res.data));
       })
       .catch((error) => {
