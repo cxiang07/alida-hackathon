@@ -10,6 +10,8 @@ import Paper from "@material-ui/core/Paper";
 import Container from "@material-ui/core/Container";
 import { TagsCell } from "../components/tagsCell";
 import { PageHeading } from "../components/PageHeading";
+import { useSelector, useDispatch } from "react-redux";
+import { userLogin } from "../redux/actions/userAction";
 
 const heading = "Your story";
 const subheading = (
@@ -67,6 +69,8 @@ const useStyles = makeStyles({
 
 export const StoryListPage = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const stories = useSelector((state) => state.stories);
 
   return (
     <div>
@@ -105,6 +109,9 @@ export const StoryListPage = () => {
           </Table>
         </TableContainer>
       </Container>
+
+      <br />
+      <button onClick={() => dispatch(userLogin())}>Test</button>
     </div>
   );
 };

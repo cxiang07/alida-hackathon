@@ -1,29 +1,31 @@
 import { setStories } from "./storeAction";
-import { useSelector } from "react-redux";
+import { useSelector } from "redux";
+import axios from "axios";
 
-const axios = require('axios');
+const axios = require("axios");
 
 // export const setUserInfo = (accountName, password) => {
 //   return {
 //     type: "SET_USER_INFO",
 //     accountName,
 //     password,
-//   };  
+//   };
 // };
 
 export const userLogin = (username, password) => {
   return function (dispatch) {
-    // const userInfo = useSelector((state) => state.userInfo);
-
-    const config = { headers: 'Authorization: Basic username:password' };
-    const userInfo = {
-       username,
-       password,
-    };
+    const token = Buffer.from(`${username}:${password}`, "utf8").toString(
+      "base64"
+    );
 
     axios
-      .put("/stories", userInfo, config)
+      .get("http://localhost:3444/v1/stories", {
+        headers: {
+          Authorization: `Basic ${token}`,
+        },
+      })
       .then((res) => {
+        console.log(res);
         dispatch(setStories(res.data));
       })
       .catch((error) => {
