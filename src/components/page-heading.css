@@ -1,0 +1,55 @@
+.page-heading {
+  background: #f2f4f7;
+  padding: 3rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+h1::after {
+  background: none repeat scroll 0 0 #2196f3;
+  bottom: -4px;
+  content: "";
+  display: block;
+  height: 4px;
+  position: relative;
+  width: 100px;
+}
+
+@media only screen and (min-width: 1060px) {
+  .page-heading-heading {
+    font-family: Lato, sans-serif;
+    font-size: 40px;
+  }
+
+  .page-heading-subheading {
+    font-family: Lato, sans-serif;
+    font-style: italic;
+  }
+
+  .page-heading-body {
+    margin-top: 2rem;
+  }
+
+  .page-heading-contents {
+    position: relative;
+    justify-items: center;
+    max-width: 1060px;
+    margin: 0px auto;
+  }
+}
+
+@media only screen and (max-width: 1059px) {
+  .page-heading-heading {
+    font-family: Lato, sans-serif;
+    font-size: 30px;
+  }
+
+  .page-heading-subheading {
+    font-family: Lato, sans-serif;
+    font-style: italic;
+  }
+
+  .page-heading-body {
+    margin-top: 2rem;
+  }
+}
