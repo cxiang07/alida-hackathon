@@ -2,13 +2,15 @@ import { setStories } from "./storeAction";
 import { useSelector } from "redux";
 import axios from "axios";
 
-export const setUserInfo = (accountName, password) => {
-  return {
-    type: "SET_USER_INFO",
-    accountName,
-    password,
-  };
-};
+const axios = require("axios");
+
+// export const setUserInfo = (accountName, password) => {
+//   return {
+//     type: "SET_USER_INFO",
+//     accountName,
+//     password,
+//   };
+// };
 
 export const userLogin = (username, password) => {
   return function (dispatch) {
