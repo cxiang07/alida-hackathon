@@ -11,7 +11,7 @@ import Paper from "@material-ui/core/Paper";
 import Container from "@material-ui/core/Container";
 import { TagsCell } from "../components/TagCell";
 import { PageHeading } from "../components/PageHeading";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const heading = "Your stories";
 const subheading = (
