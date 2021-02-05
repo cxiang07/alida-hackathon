@@ -54,7 +54,7 @@ export const ShortAnswerList = (props) => {
   return (
     <Container>
       <Typography style={{ margin: "25px 0" }} variant="h4">
-        Short Answer Question: {title}
+        Short Answer Question: "{title}"
       </Typography>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="customized table">

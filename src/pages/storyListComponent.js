@@ -64,16 +64,16 @@ function generateTags(story) {
   let tags = [];
 
   if (story.story_poll_voter_infos) {
-    tags.push("Poll Survery");
+    tags.push("Poll Survey");
   }
   if (story.story_sliders) {
-    tags.push("Slider Survery");
+    tags.push("Slider Survey");
   }
   if (story.story_questions) {
-    tags.push("Short Answer Survery");
+    tags.push("Short Answer Survey");
   }
   if (story.story_quizs) {
-    tags.push("Single Choice Survery");
+    tags.push("Single Choice Survey");
   }
   return tags;
 }
