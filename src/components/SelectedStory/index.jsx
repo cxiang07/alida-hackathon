@@ -9,9 +9,6 @@ import Typography from '@material-ui/core/Typography';
 import Container from "@material-ui/core/Container";
 import Chart from "react-apexcharts";
 
-const splitPathname = window.location.pathname.split('/');
-const selectedStoryId = splitPathname[splitPathname.length-1];
-
 const heading = `Your story`;
 const subheading = (
     <div>
@@ -49,8 +46,9 @@ const useStyles = makeStyles({
 
 export default function SelectedStory() {
     const classes = useStyles();
-    const stories = useSelector((state) => state.stories[0].stories);
-    console.log(stories);
+    const stories = useSelector((state) => state.stories);
+    const splitPathname = window.location.pathname.split('/');
+    const selectedStoryId = splitPathname[splitPathname.length-1];
     const selectedStory = stories.filter((story) => {
         return story.id === selectedStoryId;
     })[0];
