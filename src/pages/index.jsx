@@ -11,9 +11,9 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useDispatch } from "react-redux";
-import { userLogin } from "../../redux/actions/userAction";
+import { userLogin } from "../redux/actions/userAction";
 import { useHistory } from "react-router-dom";
-
+import { Spinner } from "../components/Spinner";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -51,6 +51,7 @@ export default function Login() {
   const classes = useStyles();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -58,7 +59,7 @@ export default function Login() {
     e.preventDefault();
 
     dispatch(userLogin(username, password, history));
-
+    setLoading(true);
     setUsername("");
     setPassword("");
   };
@@ -72,6 +73,14 @@ export default function Login() {
       setPassword(value);
     }
   };
+
+  if (loading) {
+    return (
+      <Container>
+        <Spinner />
+      </Container>
+    );
+  }
 
   return (
     <Container component="main" maxWidth="xs">

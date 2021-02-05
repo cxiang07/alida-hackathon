@@ -1,5 +1,5 @@
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
-import Login from "../src/components/Login";
+import Login from "./pages";
 import { StoryListPage } from "./pages/storyListComponent";
 import ReduxTest from "./ReduxTest";
 
