@@ -1,5 +1,6 @@
 import React from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
+import { Link, MenuItem } from "@material-ui/core";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -12,7 +13,7 @@ import { TagsCell } from "../components/tagsCell";
 import { PageHeading } from "../components/PageHeading";
 import { useSelector, useDispatch } from "react-redux";
 
-const heading = "Your story";
+const heading = "Your stories";
 const subheading = (
   <div>
     <p>Check all your active stories on Instagram here.</p>
@@ -20,7 +21,7 @@ const subheading = (
 );
 const body = (
   <div>
-    <p>You can click on a Story to see the statics of your story feed.</p>
+    <p>You can click on a Story to see the statistics of your story feed.</p>
   </div>
 );
 
@@ -115,13 +116,16 @@ export const StoryListPage = () => {
               {stories.map((story) => (
                 <StyledTableRow key={story.id}>
                   <StyledTableCell component="th" scope="row" align="center">
-                    {story.id}
+                    <Link href={`/stories/${story.id}`} style={{ textDecoration: 'none', color: '#000000DE' }}>
+                      {story.id}
+                    </Link>
                   </StyledTableCell>
                   <StyledTableCell align="center">
                     {toDateTime(story.taken_at)}
                   </StyledTableCell>
                   <StyledTableCell align="center">
                     {toDateTime(story.expiring_at)}
+                    
                   </StyledTableCell>
                   <StyledTableCell align="center">
                     {story.viewer_count}
