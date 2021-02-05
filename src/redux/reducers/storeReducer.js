@@ -1,6 +1,6 @@
 const INITIAL_STATE = [
   {
-    id: 123,
+    id: "123",
     date: "2020-02-04",
     storyName: "this is a test",
     pollFeeds: [],

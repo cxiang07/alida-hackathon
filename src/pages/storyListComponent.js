@@ -1,6 +1,6 @@
 import React from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
-import { Link, MenuItem } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -9,7 +9,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Container from "@material-ui/core/Container";
-import { TagsCell } from "../components/tagsCell";
+import { TagsCell } from "../components/TagCell";
 import { PageHeading } from "../components/PageHeading";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -46,21 +46,6 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-const rows = [
-  {
-    storyId: 123,
-    date: "2020-02-02",
-    viewCount: 100,
-    tags: ["Poll", "Slider"],
-  },
-  {
-    storyId: 234,
-    date: "2020-02-02",
-    viewCount: 100,
-    tags: ["Quiz"],
-  },
-];
-
 const useStyles = makeStyles({
   table: {
     minWidth: 700,
@@ -70,7 +55,9 @@ const useStyles = makeStyles({
 function toDateTime(secs) {
   let t = new Date(1970, 0, 1); // Epoch
   t.setSeconds(secs);
-  return t.toDateString();
+  const offsetMs = t.getTimezoneOffset() * 60 * 1000;
+  const dateLocal = new Date(t.getTime() - offsetMs);
+  return dateLocal.toLocaleString();
 }
 
 function generateTags(story) {
@@ -116,7 +103,10 @@ export const StoryListPage = () => {
               {stories.map((story) => (
                 <StyledTableRow key={story.id}>
                   <StyledTableCell component="th" scope="row" align="center">
-                    <Link href={`/stories/${story.id}`} style={{ textDecoration: 'none', color: '#000000DE' }}>
+                    <Link
+                      to={`/stories/${story.id}`}
+                      style={{ textDecoration: "none", color: "#1976d2" }}
+                    >
                       {story.id}
                     </Link>
                   </StyledTableCell>
@@ -125,7 +115,6 @@ export const StoryListPage = () => {
                   </StyledTableCell>
                   <StyledTableCell align="center">
                     {toDateTime(story.expiring_at)}
-                    
                   </StyledTableCell>
                   <StyledTableCell align="center">
                     {story.viewer_count}
