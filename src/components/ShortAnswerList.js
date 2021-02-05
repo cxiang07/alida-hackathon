@@ -45,7 +45,6 @@ function toDateTime(secs) {
 }
 
 export const ShortAnswerList = (props) => {
-  console.log(props);
   const classes = useStyles();
   const storyResponders =
     props.story.story_question_responder_infos[0].responders;

@@ -81,8 +81,6 @@ function generateTags(story) {
 export const StoryListPage = () => {
   const classes = useStyles();
   const stories = useSelector((state) => state.stories);
-
-  console.log(stories);
   
   return (
     <div>
