@@ -53,8 +53,6 @@ export default function SelectedStory() {
         return story.id === selectedStoryId;
     })[0];
 
-    console.log(selectedStory);
-
     const questionTypesForStory = () => {
         let tags = [];
         if (selectedStory.story_poll_voter_infos) {

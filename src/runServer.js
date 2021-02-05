@@ -12,12 +12,10 @@ async function auth(ctx, next) {
   // Commented out as we won't be using any form of encoding for now
   const buff = Buffer.from(token2, "base64");
   const token = buff.toString("ascii");
-  // console.log(`token: ${data}`)
 
   ctx.state = {};
   ctx.state.username = token.split(":")[0];
   ctx.state.password = token.split(":")[1];
-  // console.log(`user: ${ctx.state.username} pass: ${ctx.state.password}`);
   await next();
 }
 
@@ -90,7 +88,6 @@ async function run() {
         return res;
       });
 
-      // console.log(myStoryFeed[1].story_sliders);
       console.log(storyMap);
       ctx.status = 200;
       ctx.body = storyMap;
