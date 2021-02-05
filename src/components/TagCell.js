@@ -1,4 +1,5 @@
 import Chip from "@material-ui/core/Chip";
+
 export const TagsCell = (props) => {
   const tags = props.tags;
 

@@ -8,7 +8,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Container from "@material-ui/core/Container";
-import { TagsCell } from "../components/tagsCell";
+import { TagsCell } from "../components/TagCell";
 import { PageHeading } from "../components/PageHeading";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -45,21 +45,6 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-const rows = [
-  {
-    storyId: 123,
-    date: "2020-02-02",
-    viewCount: 100,
-    tags: ["Poll", "Slider"],
-  },
-  {
-    storyId: 234,
-    date: "2020-02-02",
-    viewCount: 100,
-    tags: ["Quiz"],
-  },
-];
-
 const useStyles = makeStyles({
   table: {
     minWidth: 700,
@@ -69,7 +54,9 @@ const useStyles = makeStyles({
 function toDateTime(secs) {
   let t = new Date(1970, 0, 1); // Epoch
   t.setSeconds(secs);
-  return t.toDateString();
+  const offsetMs = t.getTimezoneOffset() * 60 * 1000;
+  const dateLocal = new Date(t.getTime() - offsetMs);
+  return dateLocal.toLocaleString();
 }
 
 function generateTags(story) {

@@ -1,7 +1,9 @@
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
-import Login from "./pages";
+import Login from "../src/components/Login";
+import { ShortAnswerList } from "./components/ShortAnswerList";
 import { StoryListPage } from "./pages/storyListComponent";
 import ReduxTest from "./ReduxTest";
+import { mockData } from "../src/mockData";
 
 function App() {
   return (
